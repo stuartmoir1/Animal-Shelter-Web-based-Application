@@ -3,7 +3,8 @@ require 'pry'
 require_relative '../models/animal'
 require_relative '../models/owner'
 
-# Create owners.
+Animal.delete_all
+Owner.delete_all
 
 owner1 = Owner.new ({
   'name' => 'Stuart',
@@ -15,14 +16,12 @@ owner2 = Owner.new ({
 })
 owner2.save
 
-# Create animals.
-
 animal1 = Animal.new ({
   'name' => 'Treacle',
   'type' => 'cat',
   'admission_date' => '01/02/15',
   'adoptable' => true,
-  'owner_id' => 1
+  'owner_id' => owner1.id
 })
 animal1.save
 
@@ -31,7 +30,7 @@ animal2 = Animal.new ({
   'type' => 'cat',
   'admission_date' => '03/04/16',
   'adoptable' => true,
-  'owner_id' => 2
+  'owner_id' => owner2.id
 })
 animal2.save
 
@@ -49,7 +48,7 @@ animal4 = Animal.new ({
   'type' => 'dog',
   'admission_date' => '07/08/15',
   'adoptable' => true,
-  'owner_id' => 1
+  'owner_id' => owner1.id
 })
 animal4.save
 
@@ -61,3 +60,7 @@ animal5 = Animal.new ({
   'owner_id' => nil
 })
 animal5.save
+
+binding.pry
+
+nil

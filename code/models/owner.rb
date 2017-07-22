@@ -4,8 +4,11 @@ require_relative '../db/sql_runner'
 
 class Owner
 
+  attr_reader :id
+  attr_writer :name
+
   def initialize(details)
-    @id = details['id']
+    @id = details['id'].to_i
     @name = details['name']
   end
 
@@ -15,10 +18,16 @@ class Owner
     @id = SqlRunner.run(sql, values)[0]['id'].to_i
   end
 
+  def update
+   sql = "UPDATE owners SET name = $1 WHERE id = $2"
+   values = [@name, @id]
+   SqlRunner.run(sql, values)
+  end
+
   def animals
     sql = "SELECT * FROM animals WHERE owner_id = $1"
     values = [@id]
-    @id = SqlRunner.run(sql, values)
+    SqlRunner.run(sql, values)
   end
 
   ###
@@ -27,6 +36,19 @@ class Owner
     sql = "SELECT * FROM owners"
     values = Array.new
     SqlRunner.run(sql, values).map { |owner| Owner.new(owner) }
+  end
+
+  # def self.find(id)
+  #   sql = "SELECT * FROM owners WHERE id = $1"
+  #   values = [@id]
+  #   owner = SqlRunner.run(sql, values).first
+  #   Owner.new(owner)
+  # end
+
+  def self.delete_all
+    sql = "DELETE FROM owners;"
+    values = Array.new
+    SqlRunner.run(sql, values)
   end
 
 end
