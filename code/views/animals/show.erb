@@ -1,0 +1,36 @@
+<h1>Animal</h1>
+
+<form action="/owners/new" method="get">
+  <input class="" type="submit" value="Add" />
+</form>  
+<form action="/owners/delete_all" method="post">
+  <input class="" type="submit" value="Delete All" />
+</form>
+
+<hr>
+
+<p>
+  ID: <%= @animal.id %><br>
+  Name: <%= @animal.name %><br>
+  Type: <%= @animal.type %><br>
+  Admission Date: <%= @animal.admission_date %><br>
+  Adoptable?: <%= @animal.adoptable %><br>
+  <% for owner in @owners do %>
+    <% if owner.id == @animal.owner_id.to_i %>
+      <% if owner.id == 1 then %>
+        Owner: <%= owner.name %>
+      <% else %>
+        Owner: <a href="/owners/<%= @animal.owner_id%>"><%= owner.name %>
+          </a>
+      <% end %>
+      <% break %>
+    <% end %>
+  <% end %>
+</p>
+
+<form action="/owners/new" method="get">
+  <input class="" type="submit" value="Add" />
+</form>  
+<form action="/owners/delete_all" method="post">
+  <input class="" type="submit" value="Delete All" />
+</form>

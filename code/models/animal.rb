@@ -73,6 +73,12 @@ class Animal
     SqlRunner.run(sql, values).map { |animal| Animal.new(animal) }
   end
 
+  def self.change_owner(old, new)
+    sql = "UPDATE animals SET owner_id = $1 WHERE owner_id = $2;"
+    values = [new, old]
+    SqlRunner.run(sql, values)
+  end
+
   def self.delete(id)
     sql = "DELETE FROM animals WHERE id = $1;"
     values = [id]

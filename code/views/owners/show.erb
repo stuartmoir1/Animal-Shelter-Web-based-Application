@@ -1,4 +1,4 @@
-<h1>Owners</h1>
+<h1>Owner</h1>
 
 <form action="/owners/new" method="get">
   <input class="" type="submit" value="Add" />
@@ -8,30 +8,16 @@
 </form> 
 
 <hr>
-  
-<% @owners.each do |owner| %>
+
   <p>
-    Name: <%= owner.name %><br>
+    Name: <%= @owner.name %><br>
     Animals:
     <% for animal in @animals %>
-      <% puts animal.owner_id %>
-      <% puts owner.id %>
-      <% if animal.owner_id.to_i == owner.id %>
+      <% if animal.owner_id.to_i == @owner.id %>
         <a href="/animals/<%= animal.id %>"><%= animal.name %></a> 
       <% end %>
     <% end %>
   </p>
-
-  <form action="/owners/<%= owner.id %>/edit" method="get">
-    <input class="" type="submit" value="Edit" />
-  </form>  
-  <form action="/owners/<%= owner.id %>/delete" method="post">
-    <input class="" type="submit" value="Delete" />
-  </form> 
-
-  <hr>
-
-<% end %>
 
 <br>
 
