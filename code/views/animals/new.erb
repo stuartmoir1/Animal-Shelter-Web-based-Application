@@ -1,0 +1,31 @@
+<h1>New Animal</h1>
+
+<form action="/animals/save" method="post">
+
+  <label for="name-field">Name:</label>
+  <input id="" type="text" name="name"/>
+
+  <label for="type-field">Type:</label>
+  <input id="" type="text" name="type"/>
+
+  <label for="admission-date-field">Admission date:</label>
+  <input id="" type="text" name="admission_date"/>
+
+  <label for="type-field">Adoptable?:</label>
+  <select name="adoptable">
+    <option></option>
+    <option value="t">Yes</option>
+    <option value="f">No</option>
+  </select>
+
+  <label for="owner-selection">Owner:</label>
+  <select name="owner_id">
+    <option><option>
+    <% @owners.each do |owner| %>
+      <option value="<%= owner.id %>"><%= owner.name %></option>
+    <% end %>
+  </select>
+  
+  <input class="" type='submit' value="Add">
+
+</form>

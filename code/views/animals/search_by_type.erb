@@ -1,0 +1,17 @@
+<h1>Search By Type</h1>
+
+<!-- Get array of type values from array of type/ value hashes. -->
+<% types = @types.map { |x| x['type'] } %>
+
+<form action="/animals/display_by_type" method="get">
+
+  <label for="type-selection">Type:<labeL>
+  <select name="type">
+    <% types.each do |type| %>
+      <option value="<%= type %>"><%= type %></option>
+    <% end %>
+  </select>
+
+  <input class="" type='submit' value="Search">
+
+</form>

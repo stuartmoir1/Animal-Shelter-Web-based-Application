@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+  <head>
+
+    <title>Animal Shelter</title>
+    <link rel="icon" href="/images/emoji_set_191_cat.png" />
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+
+  </head>
+
+  <body>
+
+    <main> 
+
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/animals">Animals</a></li>
+          <li><a href="/owners">Owners</a></li>
+          <li><a href="/animals/for_adoption">For Adoption</a></li>
+          <li><a href="/animals/not_for_adoption">Not For Adoption</a></li>
+          <li><a href="/animals/search_by_type">Search By Type</a></li>
+        </ul>
+      </nav>
+      
+      <section>
+      <%= yield %>
+      </section>
+
+    </main>
+
+  </body>
+
+</html>

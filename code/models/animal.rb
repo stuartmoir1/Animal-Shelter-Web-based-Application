@@ -1,8 +1,11 @@
+require 'pry'
+
 require_relative '../db/sql_runner'
 
 class Animal
 
-  attr_writer :name, :type, :admission_date, :adoptable, :owner_id
+  attr_reader :id
+  attr_accessor :name, :type, :admission_date, :adoptable, :owner_id
 
   def initialize(details)
     @id = details['id'].to_i
@@ -10,7 +13,7 @@ class Animal
     @type = details['type']
     @admission_date = details['admission_date']
     @adoptable = details['adoptable']
-    @owner_id = details['owner_id']
+    @owner_id = details['owner_id'] # No '.to_i' as may be set to nil.
   end
 
   def save
@@ -25,20 +28,56 @@ class Animal
     SqlRunner.run(sql, values)
   end
 
+  def owner
+    sql = "SELECT * FROM owners WHERE id = $1;"
+    values = [@owner_id]
+    SqlRunner.run(sql, values)
+  end
+
   ###
 
   def self.all
-    sql = "SELECT * FROM animals"
+    sql = "SELECT * FROM animals ORDER BY id ASC;"
     values = Array.new
     SqlRunner.run(sql, values).map { |animal| Animal.new(animal) }
   end
 
-  # def self.find(id)
-  #   sql = "SELECT * FROM animals WHERE id = $1"
-  #   values = [@id]
-  #   animal = SqlRunner.run(sql, values).first
-  #   Animal.new(animal)
-  # end
+  def self.find(id)
+    sql = "SELECT * FROM animals WHERE id = $1;"
+    values = [id]
+    animal = SqlRunner.run(sql, values).first
+    Animal.new(animal)
+  end
+
+  def self.for_adoption
+    sql = "SELECT * FROM animals WHERE adoptable = TRUE;"
+    values = Array.new
+    SqlRunner.run(sql, values).map { |animal| Animal.new(animal) }
+  end
+
+  def self.not_for_adoption
+    sql = "SELECT * FROM animals WHERE adoptable = FALSE;"
+    values = Array.new
+    SqlRunner.run(sql, values).map { |animal| Animal.new(animal) }
+  end
+
+  def self.types
+    sql = "SELECT DISTINCT type FROM animals;"
+    values = Array.new
+    SqlRunner.run(sql, values)
+  end
+
+  def self.by_type(type)
+    sql = 'SELECT * FROM animals WHERE type = $1;'
+    values = [type]
+    SqlRunner.run(sql, values).map { |animal| Animal.new(animal) }
+  end
+
+  def self.delete(id)
+    sql = "DELETE FROM animals WHERE id = $1;"
+    values = [id]
+    SqlRunner.run(sql, values)
+  end
 
   def self.delete_all
     sql = "DELETE FROM animals;"

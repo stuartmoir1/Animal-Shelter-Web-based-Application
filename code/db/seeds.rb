@@ -3,8 +3,8 @@ require 'pry'
 require_relative '../models/animal'
 require_relative '../models/owner'
 
-Animal.delete_all
-Owner.delete_all
+# Animal.delete_all
+# Owner.delete_all
 
 owner1 = Owner.new ({
   'name' => 'Stuart',
@@ -62,5 +62,4 @@ animal5 = Animal.new ({
 animal5.save
 
 binding.pry
-
 nil

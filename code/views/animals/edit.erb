@@ -1,0 +1,45 @@
+<h1>Edit Animal</h1>
+
+<form action="/animals/<%= @animal.id %>/update" method="post">
+
+  <label for="name-field">Name:</label>
+  <input id="" type="text" name="name" value="<%= @animal.name %>"/>
+
+  <label for="type-field">Type:</label>
+  <input id="" type="text" name="type" value="<%= @animal.type %>"/>
+
+  <label for="admission-date-field">Admission date:</label>
+  <input id="" type="text" name="admission_date" value="<%= @animal.admission_date%>"/>
+
+  <label for="adoptable-selection">Adoptable?:</label>
+  <select name="adoptable">
+    <option></option>
+    <!-- Display existing value -->
+    <% if @animal.adoptable == 't' %>
+      <option value="t" selected>Yes</option>
+      <option value="f">No</option>
+    <% elsif @animal.adoptable == 'f' %>
+      <option value="t">Yes</option>
+      <option value="f" selected>No</option>
+    <% else %>
+      <option value="t">Yes</option>
+      <option value="f">No</option>
+    <% end %>
+  </select>
+
+  <label for="owner-selection">Owner:</label>
+  <select name="owner_id">
+    <option><option>
+    <!-- Display existing value -->
+    <% @owners.each do |owner| %>
+      <% if @animal.owner_id.to_i == owner.id %>
+        <option value="<%= owner.id %>" selected><%= owner.name %></option>
+      <% else %>
+        <option value="<%= owner.id %>"><%= owner.name %></option>
+      <% end %>
+    <% end %>
+  </select>
+
+  <input class="" type='submit' value="Update">
+
+</form>

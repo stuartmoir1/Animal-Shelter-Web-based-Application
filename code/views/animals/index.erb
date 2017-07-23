@@ -1,0 +1,41 @@
+<h1><%= @heading %></h1>
+
+<form action="/animals/new" method="get">
+  <input class="" type="submit" value="Add" />
+</form> 
+<form action="/animals/delete_all" method="post">
+  <input class="" type="submit" value="Delete All" />
+</form>  
+
+<hr>
+
+<% @animals.each do |animal| %>
+  
+  <p>
+    ID: <%= animal.id %><br>
+    Name: <%= animal.name %><br>
+    Type: <%= animal.type %><br>
+    Admission Date: <%= animal.admission_date %><br>
+    Adoptable?: <%= animal.adoptable %><br>
+    Owner: <%= animal.owner %>
+  </p>
+  
+  <form action="/animals/<%= animal.id %>/edit" method="get">
+    <input class="" type="submit" value="Edit" />
+  </form>  
+  <form action="/animals/<%= animal.id %>/delete" method="post">
+    <input class="" type="submit" value="Delete" />
+  </form>  
+  
+  <hr>
+
+<% end %>
+
+<br>
+
+<form action="/animals/new" method="get">
+  <input class="" type="submit" value="Add" />
+</form> 
+<form action="/animals/delete_all" method="post">
+  <input class="" type="submit" value="Delete All" />
+</form>

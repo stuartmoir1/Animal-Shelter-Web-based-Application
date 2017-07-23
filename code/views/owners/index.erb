@@ -1,0 +1,33 @@
+<h1>Owners</h1>
+
+<form action="/owners/new" method="get">
+  <input class="" type="submit" value="Add" />
+</form>  
+<form action="/owners/delete_all" method="post">
+  <input class="" type="submit" value="Delete All" />
+</form> 
+
+<hr>
+
+<% @owners.each do |owner| %>
+  <p>
+    Name: <%= owner.name %><br>
+    Animals: <%= owner.animals %>
+  </p>
+  <form action="/owners/<%= owner.id %>/edit" method="get">
+    <input class="" type="submit" value="Edit" />
+  </form>  
+  <form action="/owners/<%= owner.id %>/delete" method="post">
+    <input class="" type="submit" value="Delete" />
+  </form> 
+  <hr>
+<% end %>
+
+<br>
+
+<form action="/owners/new" method="get">
+  <input class="" type="submit" value="Add" />
+</form>  
+<form action="/owners/delete_all" method="post">
+  <input class="" type="submit" value="Delete All" />
+</form> 
