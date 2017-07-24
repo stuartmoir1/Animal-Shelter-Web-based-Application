@@ -2,22 +2,96 @@
 
 <form action="/animals/save" method="post">
 
+  <!-- Name -->
   <label for="name-field">Name:</label>
   <input id="" type="text" name="name"/>
+  <br><br>
 
+  <!-- Type -->
   <label for="type-field">Type:</label>
-  <input id="" type="text" name="type"/>
+  <input disabled id="" type="text" name="type" value="<%= @type %>"/>
+  <br><br>
 
+  <!-- Gender -->
+  <label for="gender-field">Gender:</label>
+  <input id="" type="text" name="gender"/>
+  <br><br>
+
+  <!-- Age -->
+  <label for="age-field">Age:</label>
+  <input id="" type="text" name="age"/>
+  <br><br>
+
+  <!-- Breed -->
+  <label for="breed-field">Breed:</label>
+  <input id="" type="text" name="breed"/>
+  <br><br>
+
+  <!-- Admission date -->
   <label for="admission-date-field">Admission date:</label>
   <input id="" type="text" name="admission_date"/>
+  <br><br>
 
-  <label for="type-field">Adoptable?:</label>
+  <!-- Adoptable -->
+  <label for="adoptable-selection">Adoptable?:</label>
   <select name="adoptable">
     <option></option>
     <option value="t">Yes</option>
     <option value="f">No</option>
   </select>
+  <br><br>
 
+  <% if @type == 'cat' %>
+
+    <!-- Colour -->
+    <label for="colour-field">Colour:</label>
+    <input id="" type="text" name="colour"/>
+    <br><br>
+
+    <!-- Can live with cats -->
+    <label for="live-with-cats-selection">Can live with cats?:</label>
+    <select name="live_with_cats">
+      <option></option>
+      <option value="t">Yes</option>
+      <option value="f">No</option>
+    </select>
+    <br><br>
+
+    <!-- Can live with dogs -->
+    <label for="live-with-dogs-selection">Can live with dogs?:</label>
+    <select name="live_with_dogs">
+      <option></option>
+      <option value="t">Yes</option>
+      <option value="f">No</option>
+    </select>
+    <br><br>
+
+    <!-- Can live with family -->
+    <label for="live-with-family-selection">Can live with family?:</label>
+    <select name="live_with_family">
+      <option></option>
+      <option value="t">Yes</option>
+      <option value="f">No</option>
+    </select>
+    <br><br>
+
+    <!-- Indoor cat -->
+    <label for="indoor-cat-selection">indoor cat?:</label>
+    <select name="indoor_cat">
+      <option></option>
+      <option value="t">Yes</option>
+      <option value="f">No</option>
+    </select>
+    <br><br>
+
+  <% end %>
+
+  <!-- Summary -->
+  <label for="summary-field">Summary:</label>
+  <input id="" type="text" size="100" name="summary"/>
+  <br><br>
+
+  <!-- Owner -->
   <label for="owner-selection">Owner:</label>
   <select name="owner_id">
     <option><option>
@@ -25,6 +99,7 @@
       <option value="<%= owner.id %>"><%= owner.name %></option>
     <% end %>
   </select>
+  <br><br>
   
   <input class="" type='submit' value="Add">
 

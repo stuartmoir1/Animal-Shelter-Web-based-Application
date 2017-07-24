@@ -2,15 +2,37 @@
 
 <form action="/animals/<%= @animal.id %>/update" method="post">
 
+  <!-- Name -->
   <label for="name-field">Name:</label>
   <input id="" type="text" name="name" value="<%= @animal.name %>"/>
+  <br><br>
 
+  <!-- Type -->
   <label for="type-field">Type:</label>
   <input id="" type="text" name="type" value="<%= @animal.type %>"/>
+  <br><br>
 
+  <!-- Gender -->
+  <label for="gender-field">Gender:</label>
+  <input id="" type="text" name="gender" value="<%= @animal.gender %>"/>
+  <br><br>
+
+  <!-- Age -->
+  <label for="age-field">Age:</label>
+  <input id="" type="text" name="age" value="<%= @animal.age %>"/>
+  <br><br>
+
+  <!-- Breed -->
+  <label for="breed-field">Breed:</label>
+  <input id="" type="text" name="breed" value="<%= @animal.breed %>"/>
+  <br><br>
+
+  <!-- Admission date -->
   <label for="admission-date-field">Admission date:</label>
   <input id="" type="text" name="admission_date" value="<%= @animal.admission_date%>"/>
+  <br><br>
 
+  <!-- Adoptable -->
   <label for="adoptable-selection">Adoptable?:</label>
   <select name="adoptable">
     <option></option>
@@ -26,7 +48,99 @@
       <option value="f">No</option>
     <% end %>
   </select>
+  <br><br>
 
+  <% if @animal.type == 'cat' %>
+    <% for details in @cat_details %>
+      <% if details.cat_id.to_i == @animal.id %>
+
+        <!-- Colour -->
+        <label for="colour-field">Breed:</label>
+        <input id="" type="text" name="colour" value="<%= details.colour %>"/>  
+        <br><br>
+
+        <!-- Live with cats -->
+        <label for="live-with-cats-selection">Can live with cats?:</label>
+        <select name="live_with_cats">
+          <option></option>
+          <!-- Display existing value -->
+          <% if details.live_with_cats == 't' %>
+            <option value="t" selected>Yes</option>
+            <option value="f">No</option>
+          <% elsif details.live_with_cats == 'f' %>
+            <option value="t">Yes</option>
+            <option value="f" selected>No</option>
+          <% else %>
+            <option value="t">Yes</option>
+            <option value="f">No</option>
+          <% end %>
+        </select>
+        <br><br>
+
+        <!-- Live with dogs -->
+        <label for="live-with-dogs-selection">Can live with dogs?:</label>
+        <select name="live_with_dogs">
+          <option></option>
+          <!-- Display existing value -->
+          <% if details.live_with_dogs == 't' %>
+            <option value="t" selected>Yes</option>
+            <option value="f">No</option>
+          <% elsif details.live_with_dogs == 'f' %>
+            <option value="t">Yes</option>
+            <option value="f" selected>No</option>
+          <% else %>
+            <option value="t">Yes</option>
+            <option value="f">No</option>
+          <% end %>
+        </select>
+        <br><br>
+
+        <!-- Live with family -->
+        <label for="live-wth-family-selection">Can live with family?:</label>
+        <select name="live_with_family">
+          <option></option>
+          <!-- Display existing value -->
+          <% if details.live_with_family == 't' %>
+            <option value="t" selected>Yes</option>
+            <option value="f">No</option>
+          <% elsif details.live_with_family == 'f' %>
+            <option value="t">Yes</option>
+            <option value="f" selected>No</option>
+          <% else %>
+            <option value="t">Yes</option>
+            <option value="f">No</option>
+          <% end %>
+        </select>
+        <br><br>
+
+        <!-- Indoors cat -->
+        <label for="indoor-cat-selection">Indoors cat?:</label>
+        <select name="indoor_cat">
+          <option></option>
+          <!-- Display existing value -->
+          <% if details.indoor_cat == 't' %>
+            <option value="t" selected>Yes</option>
+            <option value="f">No</option>
+          <% elsif details.indoor_cat == 'f' %>
+            <option value="t">Yes</option>
+            <option value="f" selected>No</option>
+          <% else %>
+            <option value="t">Yes</option>
+            <option value="f">No</option>
+          <% end %>
+        </select>
+        <br><br>
+
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <!-- Summary -->
+  <label for="summary-field">Summary:</label>
+  <input id="" type="text" name="summary" size="100" value="<%= @animal.summary %>"/>  
+  <br><br>
+
+  <!-- Owner -->
   <label for="owner-selection">Owner:</label>
   <select name="owner_id">
     <option><option>
@@ -39,6 +153,7 @@
       <% end %>
     <% end %>
   </select>
+  <br><br>
 
   <input class="" type='submit' value="Update">
 

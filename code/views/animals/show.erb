@@ -6,7 +6,11 @@
   ID: <%= @animal.id %><br>
   Name: <%= @animal.name %><br>
   Type: <%= @animal.type %><br>
+  Gender: <%= @animal.gender %><br>
+  Age: <%= @animal.age %><br>
+  Breed: <%= @animal.admission_date %><br>
   Admission Date: <%= @animal.admission_date %><br>
+  
   Adoptable?:
   <% if @animal.adoptable == 't' %>
     Yes
@@ -14,6 +18,45 @@
     No
   <% end %>
   <br>
+
+  <!-- Display cat details, as required -->
+  <% if @animal.type == 'cat' %>
+    <% for details in @cat_details %>
+      <% if details.cat_id.to_i == @animal.id %>
+        Colour: <%= details.colour %><br>
+        Can live with cats?: 
+        <% if details.live_with_cats == 't' %>
+          Yes
+        <% else %>
+          No
+        <% end %>
+        <br>
+        Can live with dogs?:
+        <% if details.live_with_dogs == 't' %>
+          Yes
+        <% else %>
+          No
+        <% end %>
+        <br>
+        Can live with family?:
+        <% if details.live_with_family == 't' %>
+          Yes
+        <% else %>
+          No
+        <% end %>
+        <br>
+        Indoors cat?:
+        <% if details.indoor_cat == 't' %><br>
+          Yes
+        <% else %>
+          No
+        <% end %>
+        <br>
+        <% break %>
+      <% end %>
+    <% end %>
+  <% end %>
+
   <% for owner in @owners do %>
     <% if owner.id == @animal.owner_id.to_i %>
       Owner: <a href="/owners/<%= @animal.owner_id%>"><%= owner.name %></a>

@@ -1,6 +1,6 @@
 <h1><%= @heading %></h1>
 
-<form action="/animals/new" method="get">
+<form action="/animals/add_by_type" method="get">
   <input class="" type="submit" value="Add" />
 </form> 
 <form action="/animals/delete_all" method="post">
@@ -15,7 +15,11 @@
     ID: <%= animal.id %><br>
     Name: <%= animal.name %><br>
     Type: <%= animal.type %><br>
+    Gender: <%= animal.gender %><br>
+    Age: <%= animal.age %><br>
+    Breed: <%= animal.breed %><br>
     Admission Date: <%= animal.admission_date %><br>
+
     Adoptable?:
     <% if animal.adoptable == 't' %>
       Yes
@@ -23,14 +27,54 @@
       No
     <% end %>
     <br>
-    <% for owner in @owners do %>
+
+    <!-- Display cat details, as required -->
+    <% if animal.type == 'cat' %>
+      <% for details in @cat_details %>
+        <% if details.cat_id.to_i == animal.id %>
+          Colour: <%= details.colour %><br>
+          Can live with cats?: 
+          <% if details.live_with_cats == 't' %>
+            Yes
+          <% else %>
+            No
+          <% end %>
+          <br>
+          Can live with dogs?:
+          <% if details.live_with_dogs == 't' %>
+            Yes
+          <% else %>
+            No
+          <% end %>
+          <br>
+          Can live with family?:
+          <% if details.live_with_family == 't' %>
+            Yes
+          <% else %>
+            No
+          <% end %>
+          <br>
+          Indoor cat?:
+          <% if details.indoor_cat == 't' %><br>
+            Yes
+          <% else %>
+            No
+          <% end %>
+          <br>
+          <% break %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% for owner in @owners %>
       <% if owner.id == animal.owner_id.to_i %>
-        Owner: <a href="/owners/<%= animal.owner_id%>"><%= owner.name %></a>
+        Owner: <a href="/owners/<%= animal.owner_id%>"><%= owner.name %></a><br>
         <% break %>
       <% end %>
     <% end %>
+
   </p>
-  
+
   <form action="/animals/<%= animal.id %>/edit" method="get">
     <input class="" type="submit" value="Edit" />
   </form>  
