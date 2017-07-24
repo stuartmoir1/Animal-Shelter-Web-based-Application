@@ -38,6 +38,12 @@ class Owner
     SqlRunner.run(sql, values).map { |owner| Owner.new(owner) }
   end
 
+  def self.owner(id)
+    sql = "SELECT * from owners WHERE id = $1;"
+    values = [id]
+    SqlRunner.run(sql, values).each { |i| i }
+  end
+
   def self.find(id)
     sql = "SELECT * FROM owners WHERE id = $1;"
     values = [id]
@@ -52,7 +58,7 @@ class Owner
   end
 
   def self.delete_all
-    sql = "DELETE FROM owners;"
+    sql = "DELETE FROM owners WHERE id <> 1;"
     values = Array.new
     SqlRunner.run(sql, values)
   end

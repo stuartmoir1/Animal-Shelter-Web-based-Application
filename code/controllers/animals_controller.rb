@@ -64,6 +64,9 @@ end
 
 post '/animals/:id/update' do
   animal = Animal.new(params)
+  # Allow for conflicting adoptable/ owner input values. Value of owner
+  # takes priority.
+  animal.owner_id != 1 ? animal.adoptable = true : animal.adoptable = false
   animal.update
   redirect to('/animals')
 end

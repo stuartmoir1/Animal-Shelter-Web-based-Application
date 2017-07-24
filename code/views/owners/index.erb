@@ -22,22 +22,17 @@
     <% end %>
   </p>
 
-  <form action="/owners/<%= owner.id %>/edit" method="get">
-    <input class="" type="submit" value="Edit" />
-  </form>  
-  <form action="/owners/<%= owner.id %>/delete" method="post">
-    <input class="" type="submit" value="Delete" />
-  </form> 
+  <% if owner.id != 1 %>
+  
+    <form action="/owners/<%= owner.id %>/edit" method="get">
+      <input class="" type="submit" value="Edit" />
+    </form>  
+    <form action="/owners/<%= owner.id %>/delete" method="post">
+      <input class="" type="submit" value="Delete" />
+    </form> 
+
+  <% end %>
 
   <hr>
 
 <% end %>
-
-<br>
-
-<form action="/owners/new" method="get">
-  <input class="" type="submit" value="Add" />
-</form>  
-<form action="/owners/delete_all" method="post">
-  <input class="" type="submit" value="Delete All" />
-</form> 

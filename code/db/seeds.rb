@@ -21,6 +21,7 @@ owner3 = Owner.new ({
 })
 owner3.save
 
+# The Shelter needs to be the first owner.
 animal1 = Animal.new ({
   'name' => 'Treacle',
   'type' => 'cat',

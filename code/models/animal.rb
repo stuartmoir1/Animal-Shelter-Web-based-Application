@@ -50,7 +50,7 @@ class Animal
   end
 
   def self.for_adoption
-    sql = "SELECT * FROM animals WHERE adoptable = TRUE;"
+    sql = "SELECT * FROM animals WHERE adoptable = TRUE AND owner_id = 1;"
     values = Array.new
     SqlRunner.run(sql, values).map { |animal| Animal.new(animal) }
   end
@@ -71,12 +71,6 @@ class Animal
     sql = 'SELECT * FROM animals WHERE type = $1;'
     values = [type]
     SqlRunner.run(sql, values).map { |animal| Animal.new(animal) }
-  end
-
-  def self.change_owner(old, new)
-    sql = "UPDATE animals SET owner_id = $1 WHERE owner_id = $2;"
-    values = [new, old]
-    SqlRunner.run(sql, values)
   end
 
   def self.delete(id)

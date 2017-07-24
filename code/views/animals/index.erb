@@ -16,15 +16,16 @@
     Name: <%= animal.name %><br>
     Type: <%= animal.type %><br>
     Admission Date: <%= animal.admission_date %><br>
-    Adoptable?: <%= animal.adoptable %><br>
+    Adoptable?:
+    <% if animal.adoptable == 't' %>
+      Yes
+    <% else %>
+      No
+    <% end %>
+    <br>
     <% for owner in @owners do %>
       <% if owner.id == animal.owner_id.to_i %>
-        <% if owner.id == 1 then %>
-          Owner: <%= owner.name %>
-        <% else %>
-          Owner: <a href="/owners/<%= animal.owner_id%>"><%= owner.name %>
-            </a>
-        <% end %>
+        Owner: <a href="/owners/<%= animal.owner_id%>"><%= owner.name %></a>
         <% break %>
       <% end %>
     <% end %>
@@ -40,12 +41,3 @@
   <hr>
 
 <% end %>
-
-<br>
-
-<form action="/animals/new" method="get">
-  <input class="" type="submit" value="Add" />
-</form> 
-<form action="/animals/delete_all" method="post">
-  <input class="" type="submit" value="Delete All" />
-</form>

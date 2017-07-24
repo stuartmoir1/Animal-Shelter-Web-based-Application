@@ -12,5 +12,10 @@ CREATE TABLE animals (
   type VARCHAR(255),
   admission_date VARCHAR(255),
   adoptable BOOLEAN NOT NULL,
-  owner_id INT8 REFERENCES owners(id)
+  owner_id INT8 DEFAULT 1,
+  
+  CONSTRAINT fk_owner_id
+    FOREIGN KEY (owner_id)
+    REFERENCES owners (id)
+    ON DELETE SET DEFAULT
 );
