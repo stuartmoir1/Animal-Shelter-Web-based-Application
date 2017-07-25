@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'sinatra/contrib/all'
+require 'pry'
 
 require_relative '../models/animal'
 require_relative '../models/owner'
@@ -59,6 +60,10 @@ get '/animals/display_by_type' do
   erb(:"animals/index")
 end
 
+get '/animals/image' do
+  erb (:"animals/image")
+end
+
 # List details of animal.
 get '/animals/:id' do
   @animal = Animal.find(params[:id])
@@ -79,6 +84,18 @@ end
 
 # Save details of animals to DB.
 post '/animals/save' do
+
+  binding.pry
+
+  # Save image file to folder.
+  if params[:image][:filename] != nil
+    filename = params[:image][:filename]
+    tempfile = params[:image][:tempfile]
+    File.open("./public/images/#{filename}", 'wb') do |file|
+      file.write(tempfile.read)
+    end
+  end
+
   animal = Animal.new(params)
   cat_details = CatDetails.new(params)
   animal.save

@@ -1,6 +1,6 @@
 <h1>New Animal</h1>
 
-<form action="/animals/save" method="post">
+<form action="/animals/save" method="post" enctype="multipart/form-data">
 
   <!-- Name -->
   <label for="name-field">Name:</label>
@@ -103,6 +103,10 @@
       <option value="<%= owner.id %>"><%= owner.name %></option>
     <% end %>
   </select>
+  <br><br>
+
+  <!-- Image -->
+  <input type="file" name="image">
   <br><br>
   
   <input class="" type='submit' value="Add">
