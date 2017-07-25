@@ -9,12 +9,24 @@
 
   <!-- Type -->
   <label for="type-field">Type:</label>
-  <input id="" type="text" name="type" value="<%= @animal.type %>"/>
+  <input readonly id="" type="text" name="type" value="<%= @animal.type %>"/>
   <br><br>
 
   <!-- Gender -->
-  <label for="gender-field">Gender:</label>
-  <input id="" type="text" name="gender" value="<%= @animal.gender %>"/>
+  <label for="gender-selection">Gender:</label>
+  <select name="gender">
+    <option></option>
+    <% if @animal.gender == 'Male' %>
+      <option value="male" selected>male</option>
+      <option value="female">female</option>
+    <% elsif @animal.gender == 'Male' %>
+      <option value="male">Male</option>
+      <option value="female" selected>female</option>
+    <% else %>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    <% end %>
+  </select>
   <br><br>
 
   <!-- Age -->
@@ -113,8 +125,8 @@
         </select>
         <br><br>
 
-        <!-- Indoors cat -->
-        <label for="indoor-cat-selection">Indoors cat?:</label>
+        <!-- Indoor cat -->
+        <label for="indoor-cat-selection">Indoor cat?:</label>
         <select name="indoor_cat">
           <option></option>
           <!-- Display existing value -->

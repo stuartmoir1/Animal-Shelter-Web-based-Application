@@ -24,6 +24,7 @@ end
 # List details of animals for adoption only.
 get '/animals/for_adoption' do
   @animals = Animal.for_adoption
+  @cat_details= CatDetails.all
   @owners = Owner.all
   @heading = 'For Adoption'
   erb(:"animals/index")
@@ -32,6 +33,7 @@ end
 # List details of animals not for adoption only.
 get '/animals/not_for_adoption' do
   @animals = Animal.not_for_adoption
+  @cat_details = CatDetails.all
   @owners = Owner.all
   @heading = 'Not For Adoption'
   erb(:"animals/index")
@@ -51,6 +53,7 @@ end
 # List details of animals by type.
 get '/animals/display_by_type' do
   @animals = Animal.by_type(params[:type])
+  @cat_details = CatDetails.all
   @owners = Owner.all
   @heading = params[:type].capitalize + 's'
   erb(:"animals/index")
@@ -76,10 +79,13 @@ end
 
 # Save details of animals to DB.
 post '/animals/save' do
-  animal = Animal.new(params[:name, :type, :gender, :age, :breed, :admission_date, :adoptable, :summary, :owner_id])
-  cat_details = CatDetails.new(params[:colour, :live_with_cats, :live_with_dogs, :live_with_family, :indoor_cat])
+  animal = Animal.new(params)
+  cat_details = CatDetails.new(params)
   animal.save
-  cat_details.save
+  if animal.type == 'cat'
+    cat_details.cat_id = animal.id
+    cat_details.save
+  end
   redirect to('/animals')
 end
 
@@ -99,7 +105,7 @@ post '/animals/:id/delete' do
   redirect to("/animals")
 end
 
-# Delete details or all animals from DB.
+# Delete details of all animals from DB.
 post '/animals/delete_all' do
   Animal.delete_all
   redirect to("/animals")

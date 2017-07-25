@@ -1,11 +1,13 @@
 <h1><%= @heading %></h1>
 
-<form action="/animals/add_by_type" method="get">
-  <input class="" type="submit" value="Add" />
-</form> 
-<form action="/animals/delete_all" method="post">
-  <input class="" type="submit" value="Delete All" />
-</form>  
+<% if @heading == 'Animals' %>
+  <form action="/animals/add_by_type" method="get">
+    <input class="" type="submit" value="Add" />
+  </form>
+  <form action="/animals/delete_all" method="post">
+    <input class="" type="submit" value="Delete All" />
+  </form>
+<% end %>
 
 <hr>
 
@@ -55,7 +57,7 @@
           <% end %>
           <br>
           Indoor cat?:
-          <% if details.indoor_cat == 't' %><br>
+          <% if details.indoor_cat == 't' %>
             Yes
           <% else %>
             No

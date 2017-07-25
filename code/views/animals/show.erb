@@ -8,7 +8,7 @@
   Type: <%= @animal.type %><br>
   Gender: <%= @animal.gender %><br>
   Age: <%= @animal.age %><br>
-  Breed: <%= @animal.admission_date %><br>
+  Breed: <%= @animal.breed %><br>
   Admission Date: <%= @animal.admission_date %><br>
   
   Adoptable?:
@@ -46,7 +46,7 @@
         <% end %>
         <br>
         Indoors cat?:
-        <% if details.indoor_cat == 't' %><br>
+        <% if details.indoor_cat == 't' %>
           Yes
         <% else %>
           No
