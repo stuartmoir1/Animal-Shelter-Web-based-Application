@@ -10,9 +10,14 @@ form {
   float: left;
 }
 
-/* table {
-  width: 300px;
-} */
+td {
+  width: 200px;
+}
+
+p {
+  word-wrap: break-word;
+  width: 500px;
+}
 
 .btn {
   background-color: #B5B9C1;
@@ -20,4 +25,3 @@ form {
   font-size: 12px;
   margin-right: 5px;
 }
-

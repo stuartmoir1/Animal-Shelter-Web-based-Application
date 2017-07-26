@@ -11,14 +11,13 @@
 <hr>
   
 <% @owners.each do |owner| %>
+
   <p>
     Name: <%= owner.name %><br>
     Animals:
     <% for animal in @animals %>
-      <% puts animal.owner_id %>
-      <% puts owner.id %>
       <% if animal.owner_id.to_i == owner.id %>
-        <a href="/animals/<%= animal.id %>"><%= animal.name %></a> 
+        <a href="/animals/<%= animal.id %>"><%= animal.name %></a>
       <% end %>
     <% end %>
   </p>
