@@ -1,6 +1,6 @@
 <h1>Edit Animal</h1>
 
-<form action="/animals/<%= @animal.id %>/update" method="post">
+<form action="/animals/<%= @animal.id %>/update" method="post" enctype="multipart/form-data">
 
   <!-- Name -->
   <label for="name-field">Name:</label>
@@ -13,15 +13,16 @@
   <br><br>
 
   <!-- Gender -->
+  <% gender = @animal.gender %>
   <label for="gender-selection">Gender:</label>
   <select name="gender">
     <option></option>
-    <% if @animal.gender == 'Male' %>
-      <option value="male" selected>male</option>
+    <% if gender.downcase == 'male' %>
+      <option value="male" selected>Male</option>
       <option value="female">female</option>
-    <% elsif @animal.gender == 'Male' %>
+    <% elsif gender.downcase == 'female' %>
       <option value="male">Male</option>
-      <option value="female" selected>female</option>
+      <option value="female" selected>Female</option>
     <% else %>
       <option value="male">Male</option>
       <option value="female">Female</option>
@@ -66,8 +67,12 @@
     <% for details in @cat_details %>
       <% if details.cat_id.to_i == @animal.id %>
 
+        <!-- HACK. Use of hidden element. See comment in -->
+        <!-- animals_controller.rb -->
+        <input name= "cat_details_id" type="hidden" value="<%= details.id %>">
+
         <!-- Colour -->
-        <label for="colour-field">Breed:</label>
+        <label for="colour-field">Colour:</label>
         <input id="" type="text" name="colour" value="<%= details.colour %>"/>  
         <br><br>
 
@@ -167,11 +172,19 @@
   </select>
   <br><br>
 
-  <!-- Show image -->
-  <p>
-    <img src="/images/peanut.jpg" alt="Hope this works..." height="200" width="200">
-  </p>
+  <!-- Show current image -->
+  <% if @animal.image_name != '' %>
+    <p>Current image</p>
+    <p>
+      <img src="/images/<%= @animal.image_name %>" alt="<%= @animal.name %>" height="200" width="200">
+    </p>
+  <% end %>
 
-  <input class="" type='submit' value="Update">
+  <!-- Upload new image -->
+  <p>Upload replacement image</p>
+  <input class ="btn" type="file" name="image">
+  <br><br>
+
+  <input class="btn" type='submit' value="Update">
 
 </form>

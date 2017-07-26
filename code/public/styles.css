@@ -1,0 +1,23 @@
+body {
+  font-family: Arial;
+}
+
+nav ul li {
+  display: inline;
+}
+
+form {
+  float: left;
+}
+
+/* table {
+  width: 300px;
+} */
+
+.btn {
+  background-color: #B5B9C1;
+  border-radius: 5px;
+  font-size: 12px;
+  margin-right: 5px;
+}
+

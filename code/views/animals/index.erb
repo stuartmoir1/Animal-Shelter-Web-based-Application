@@ -2,17 +2,138 @@
 
 <% if @heading == 'Animals' %>
   <form action="/animals/add_by_type" method="get">
-    <input class="" type="submit" value="Add" />
+    <input class="btn" type="submit" value="Add" />
   </form>
   <form action="/animals/delete_all" method="post">
-    <input class="" type="submit" value="Delete All" />
+    <input class="btn" type="submit" value="Delete All" />
   </form>
+  <br><br>
+  <hr>
+<% else %>
+  <hr>
 <% end %>
 
-<hr>
+
 
 <% @animals.each do |animal| %>
   
+  <table width=300px>
+    
+    <tr>
+      <td>ID:</td>
+      <td><%= animal.id %></td>
+    </tr>
+    
+    <tr>
+      <td>Name:</td>
+      <td><%= animal.name %></td>
+    </tr>
+    
+    <tr>
+      <td>Type:</td>
+      <td><%= animal.type %></td>
+    </tr>
+    
+    <tr>
+      <td>Gender:</td>
+      <td><%= animal.gender %></td>
+    </tr>
+    
+    <tr>
+      <td>Age:</td>
+      <td><%= animal.age %></td>
+    </tr>
+    
+    <tr>
+      <td>Breed:</td>
+      <td><%= animal.breed %></td>
+    </tr>
+    
+    <tr>
+      <td>Admission date:</td>
+      <td><%= animal.admission_date %></td>
+    </tr>
+
+    <tr>
+      <td>Adoptable?:</td>
+      <% if animal.adoptable == 't' %>
+        <td>Yes</td>
+      <% else %>
+        <td>No</td>td>
+      <% end %>
+    </tr>  
+
+    <% if animal.type == 'cat' %>
+      <% for details in @cat_details %>
+        <% if details.cat_id.to_i == animal.id %>
+          
+          <tr>
+            <td>Colour:</td>
+            <td><%= details.colour %></td>
+          </tr>
+          
+          <tr>
+            <td>Can live with cats?:</td>
+              <% if details.live_with_cats == 't' %>
+                <td>Yes</td>
+              <% else %>
+                <td>No</td>
+              <% end %>
+          </tr>
+          
+          <tr>
+            <td>Can live with dogs?:</td>
+              <% if details.live_with_dogs == 't' %>
+                <td>Yes</td>
+              <% else %>
+                <td>No</td>
+              <% end %>
+          </tr>
+          
+          <tr>
+            <td>Can live with family?:</td>
+              <% if details.live_with_family == 't' %>
+                <td>Yes</td>
+              <% else %>
+                <td>No</td>
+              <% end %>
+          </tr>
+          
+          <tr>
+           <td>Indoor cat?:</td>
+            <% if details.indoor_cat == 't' %>
+              <td>Yes</td>
+            <% else %>
+              <td>No</td>
+            <% end %>
+          </tr>
+
+          <% break %>
+
+        <% end %>
+      <% end %>
+    <% end %>
+  </table>
+
+  <p>Summary:</p>
+  <p><%= animal.summary %><p>
+
+
+  <% for owner in @owners %>
+    <% if owner.id == animal.owner_id.to_i %>
+
+      <table>
+        <tr>
+          <td>Owner:</td>
+          <td><a href="/owners/<%= animal.owner_id%>"><%= owner.name %></a></td>
+        </tr>
+      </table>
+
+      <% break %>
+
+    <% end %>
+  <% end %>
+
   <p>
     ID: <%= animal.id %><br>
     Name: <%= animal.name %><br>
@@ -29,6 +150,8 @@
       No
     <% end %>
     <br>
+
+
 
     <!-- Display cat details, as required -->
     <% if animal.type == 'cat' %>
@@ -68,6 +191,9 @@
       <% end %>
     <% end %>
 
+    Summary: <%= animal.summary %>
+    <br>
+
     <% for owner in @owners %>
       <% if owner.id == animal.owner_id.to_i %>
         Owner: <a href="/owners/<%= animal.owner_id%>"><%= owner.name %></a><br>
@@ -78,17 +204,20 @@
   </p>
 
   <!-- Show image -->
-  <p>
-    <img src="/images/peanut.jpg" alt="Hope this works..." height="200" width="200">
-  </p>
+  <% if animal.image_name != '' %>
+    <p>
+      <img src="/images/<%= animal.image_name %>" alt="<%= animal.name %>" height="200" width="200">
+    </p>
+  <% end %>
 
   <form action="/animals/<%= animal.id %>/edit" method="get">
-    <input class="" type="submit" value="Edit" />
+    <input class="btn" type="submit" value="Edit" />
   </form>  
   <form action="/animals/<%= animal.id %>/delete" method="post">
-    <input class="" type="submit" value="Delete" />
+    <input class="btn" type="submit" value="Delete" />
   </form>  
   
+  <br><br>
   <hr>
 
 <% end %>

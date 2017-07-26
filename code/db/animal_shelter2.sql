@@ -17,6 +17,7 @@ CREATE TABLE animals (
   admission_date VARCHAR(255),
   adoptable BOOLEAN NOT NULL,
   summary TEXT,
+  image_name VARCHAR(255),
   owner_id INT8 DEFAULT 1,
   
   CONSTRAINT fk_owner_id

@@ -24,8 +24,9 @@ class CatDetails
   end
 
   def update
+
     sql = "UPDATE cat_details SET colour = $1, live_with_cats = $2, live_with_dogs = $3, live_with_family = $4, indoor_cat = $5, cat_id = $6 WHERE id = $7;"
-    values = [@colour, @live_with_cats, @live_with_dogs, @live_with_family, @indoor_cat, @id]
+    values = [@colour, @live_with_cats, @live_with_dogs, @live_with_family, @indoor_cat, @cat_id, @id]
     SqlRunner.run(sql, values)
   end
 

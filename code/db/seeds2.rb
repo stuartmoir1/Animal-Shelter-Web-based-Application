@@ -33,6 +33,7 @@ animal1 = Animal.new ({
   'admission_date' => '01/02/15',
   'adoptable' => true,
   'summary' => 'The quick brown fox jumps over the lazy dog.',
+  'image_name' => '',
   'owner_id' => owner2.id
 })
 animal1.save
@@ -46,19 +47,21 @@ animal2 = Animal.new ({
   'admission_date' => '03/04/16',
   'adoptable' => true,
   'summary' => 'The rain in Spain falls mainly on the plain.',
+  'image_name' => '',
   'owner_id' => owner3.id
 })
 animal2.save
 
 animal3 = Animal.new ({
-  'name' => 'Honey',
+  'name' => 'Winston',
   'type' => 'cat',
-  'gender' => 'female',
+  'gender' => 'male',
   'age' => 17,
   'breed' => 'Other',
   'admission_date' => '05/06/17',
   'adoptable' => false,
   'summary' => 'All work and no play makes Jack a dull boy.',
+  'image_name' => '',
   'owner_id' => owner1.id
 })
 animal3.save
@@ -72,6 +75,7 @@ animal4 = Animal.new ({
   'admission_date' => '07/08/15',
   'adoptable' => true,
   'summary' => 'Pack my box with five dozen liquor jugs.',
+  'image_name' => '',
   'owner_id' => owner2.id
 })
 animal4.save
@@ -85,6 +89,7 @@ animal5 = Animal.new ({
   'admission_date' => '09/10/16',
   'adoptable' => false,
   'summary' => 'Sphinx of black quartz, judge my vow.',
+  'image_name' => '',
   'owner_id' => owner1.id
 })
 animal5.save

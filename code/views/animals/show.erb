@@ -66,15 +66,17 @@
 </p>
 
 <!-- Show image -->
-<p>
-  <img src="/images/peanut.jpg" alt="Hope this works..." height="200" width="200">
-</p>
+  <% if @animal.image_name != '' %>
+    <p>
+      <img src="/images/<%= @animal.image_name %>" alt="<%= @animal.name %>" height="200" width="200">
+    </p>
+  <% end %>
 
 <form action="/animals/<%= @animal.id %>/edit" method="get">
-  <input class="" type="submit" value="Edit" />
+  <input class="btn" type="submit" value="Edit" />
 </form>  
 <form action="/animals/<%= @animal.id %>/delete" method="post">
-  <input class="" type="submit" value="Delete" />
+  <input class="btn" type="submit" value="Delete" />
 </form>  
 
 <hr>

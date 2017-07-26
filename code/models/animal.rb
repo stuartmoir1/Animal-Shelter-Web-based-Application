@@ -5,30 +5,31 @@ require_relative '../db/sql_runner'
 class Animal
 
   attr_reader :id
-  attr_accessor :name, :type, :gender, :age, :breed, :admission_date, :adoptable, :summary, :owner_id
+  attr_accessor :name, :type, :gender, :age, :breed, :admission_date, :adoptable, :summary, :image_name, :owner_id
 
   def initialize(details)
     @id = details['id'].to_i
     @name = details['name']
     @type = details['type']
     @gender = details['gender']
-    @age = details['age']
+    @age = details['age'].to_i
     @breed = details['breed']
     @admission_date = details['admission_date']
     @adoptable = details['adoptable']
     @summary = details['summary']
+    @image_name = details['image_name']
     @owner_id = details['owner_id'] # No '.to_i' as may be set to nil.
   end
 
   def save
-    sql = "INSERT INTO animals (name, type, gender, age, breed, admission_date, adoptable, summary, owner_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id;"
-    values = [@name, @type, @gender, @age, @breed, @admission_date, @adoptable, @summary, @owner_id]
+    sql = "INSERT INTO animals (name, type, gender, age, breed, admission_date, adoptable, summary, image_name, owner_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id;"
+    values = [@name, @type, @gender, @age, @breed, @admission_date, @adoptable, @summary, @image_name, @owner_id]
     @id = SqlRunner.run(sql, values)[0]['id'].to_i
   end
 
   def update
-    sql = "UPDATE animals SET name = $1, type = $2, gender = $3, age = $4, breed = $5, admission_date = $6, adoptable = $7, summary = $8, owner_id = $9 WHERE id = $10;"
-    values = [@name, @type, @gender, @age, @breed, @admission_date, @adoptable, @summary, @owner_id, @id]
+    sql = "UPDATE animals SET name = $1, type = $2, gender = $3, age = $4, breed = $5, admission_date = $6, adoptable = $7, summary = $8, image_name = $9, owner_id = $10 WHERE id = $11;"
+    values = [@name, @type, @gender, @age, @breed, @admission_date, @adoptable, @summary, @image_name, @owner_id, @id]
     SqlRunner.run(sql, values)
   end
 

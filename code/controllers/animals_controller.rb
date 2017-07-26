@@ -85,15 +85,16 @@ end
 # Save details of animals to DB.
 post '/animals/save' do
 
-  binding.pry
-
   # Save image file to folder.
-  if params[:image][:filename] != nil
-    filename = params[:image][:filename]
+  if params[:image] != nil
+    filename = "#{params[:name]}.jpg"
     tempfile = params[:image][:tempfile]
+    params[:image_name] = filename
     File.open("./public/images/#{filename}", 'wb') do |file|
       file.write(tempfile.read)
     end
+  else
+    params[:image_name] = ''
   end
 
   animal = Animal.new(params)
@@ -108,11 +109,42 @@ end
 
 # Update details of animal to DB.
 post '/animals/:id/update' do
+
   animal = Animal.new(params)
+
+  # HACK. Gathering data for two classes from a single form causes the 'id'
+  # attribute of both class objects (animal, cat_details) to be set to the
+  # 'id' attribute of the object created first (animal). This has the 
+  # effect of causing the cat details to up update. The following assignment
+  # of a hidden variable from the form animals/edit works around this issue
+  # by explicitly setting the cat details 'id' the object is created.
+  params['id'] = params['cat_details_id']
+
+  cat_details = CatDetails.new(params)
+
+  # Save image file to folder.
+  if params[:image] != nil
+    filename = "#{params[:name]}.jpg"
+    tempfile = params[:image][:tempfile]
+    animal.image_name = filename
+    File.open("./public/images/#{filename}", 'wb') do |file|
+      file.write(tempfile.read)
+    end
+  elsif File.exist?("./public/images/#{animal.name}.jpg") == true
+    animal.image_name = "#{animal.name}.jpg"
+  else
+    animal.image_name = ''
+  end
+
   # Allow for conflicting adoptable/ owner input values. Value of owner
   # takes priority.
-  animal.owner_id != 1 ? animal.adoptable = true : animal.adoptable = false
+  animal.adoptable = true if animal.owner_id.to_i != 1
+
   animal.update
+  if animal.type == 'cat'
+    cat_details.cat_id = animal.id
+    cat_details.update
+  end
   redirect to('/animals')
 end
 
